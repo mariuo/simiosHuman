@@ -1,38 +1,42 @@
 package com.mcamelo.simiosHuman.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_category")
-public class Category implements Serializable{
+@Table(name = "tb_dna")
+public class Dna implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(columnDefinition = "TEXT")
 	private String name;
 	
-	@OneToMany(mappedBy = "category")
-	private List<Dna> dnas = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 	
-	public Category() {
-	
+	public Dna() {
 		
 	}
-	public Category(Long id, String name) {
-		
+
+	public Dna(Long id, String name, Category category) {
+		super();
 		this.id = id;
 		this.name = name;
+		this.category = category;
 	}
 
 	public Long getId() {
@@ -50,15 +54,20 @@ public class Category implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public List<Dna> getDnas() {
-		return dnas;
+
+	public Category getCategory() {
+		return category;
 	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -67,8 +76,11 @@ public class Category implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		Dna other = (Dna) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	
+	
 
 }
