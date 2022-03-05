@@ -46,8 +46,17 @@ public class DnaResource {
 	*/
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	public ResponseEntity<DnaDTO> isSimian(@RequestBody DnaTestDTO dto){
-		//service.isSimian(dto);
-		return ResponseEntity.ok().body(service.isSimian(dto));
+		DnaDTO result = service.isSimian(dto);
+		var resu = ResponseEntity.status(403).body(service.isSimian(dto));
+		if(result != null) {
+			if(result.getCategoryName().contains("Simios"))
+				resu = ResponseEntity.status(200).body(service.isSimian(dto));
+			else {
+				resu = ResponseEntity.status(403).body(service.isSimian(dto));
+			}
+		 
+		}
+		return resu;
 	}
 	
 

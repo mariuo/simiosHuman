@@ -12,6 +12,7 @@ import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
 import com.mcamelo.simiosHuman.entities.Dna;
 import com.mcamelo.simiosHuman.repositories.CategoryRepository;
 import com.mcamelo.simiosHuman.repositories.DnaRepository;
+import com.mcamelo.simiosHuman.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class DnaService {
@@ -28,8 +29,13 @@ public class DnaService {
 		
 		return list.stream().map(x -> new DnaDTO(x)).collect(Collectors.toList());
 	}
-
+	@Transactional
 	public DnaDTO isSimian(DnaTestDTO dto) {
+		
+		if(!checkMatrixNN(dto)) {
+			new ResourceNotFoundException("Entity not found");
+		}
+		
 		//checkMatrixNN(dto);
 		if(convertMatrix(dto) != null) {
 			convertMatrix(dto);
@@ -78,7 +84,6 @@ public class DnaService {
 	
 	public static boolean checkMatrixNN(DnaTestDTO dto) {		
 		int lines = dto.getDna().size();
-		int col = dto.getDna().get(0).length();
 					
 		for(String item : dto.getDna()) {
 			if(item.length() != lines) {
