@@ -1,5 +1,7 @@
 package com.mcamelo.simiosHuman.services;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mcamelo.simiosHuman.dtos.DnaDTO;
 import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
+import com.mcamelo.simiosHuman.dtos.StatsDTO;
 import com.mcamelo.simiosHuman.entities.Dna;
 import com.mcamelo.simiosHuman.repositories.CategoryRepository;
 import com.mcamelo.simiosHuman.repositories.DnaRepository;
@@ -29,6 +32,25 @@ public class DnaService {
 		
 		return list.stream().map(x -> new DnaDTO(x)).collect(Collectors.toList());
 	}
+	@Transactional(readOnly = true)
+	public StatsDTO result() {
+		int sim = 0, hum=0;
+		List<Dna> list = repository.findAll();
+		for(Dna x : list) {
+			if(x.getCategory().getId() == 2L) {
+				sim++;
+				
+			}else {
+				hum++;
+				
+			}
+		}
+		Double score = (double)sim/(double)hum;
+		BigDecimal bd = new BigDecimal(score).setScale(1, RoundingMode.HALF_UP);
+		score = (double) bd.doubleValue();
+		System.out.println(score);
+		return new StatsDTO(sim,hum,score);
+	}
 	@Transactional
 	public DnaDTO isSimian(DnaTestDTO dto) {
 		
@@ -38,25 +60,28 @@ public class DnaService {
 		
 		//checkMatrixNN(dto);
 		if(convertMatrix(dto) != null) {
-			convertMatrix(dto);
-		}
-		if (horizontal(convertMatrix(dto)) || vertical(convertMatrix(dto)) || diagonal(convertMatrix(dto))) {
+			String[][] mat = convertMatrix(dto);
+		
+			if (horizontal(mat) || vertical(mat) || diagonal(mat)) {
 			// Insert DNA in database as Simios Category=2
-			Dna entity = new Dna();
-			entity.setName(dto.getDna().toString());
-			entity.setCategory(catRepository.findById(2L).get());
-			entity = repository.save(entity);
+				Dna entity = new Dna();
+				entity.setName(dto.getDna().toString());
+				entity.setCategory(catRepository.findById(2L).get());
+				entity = repository.save(entity);
 			
-			return new DnaDTO(entity);
+				return new DnaDTO(entity);
 					
-		}else {
+			}else {
 			// Insert DNA in database as Human Category=1
 						Dna entity = new Dna();
 						entity.setName(dto.getDna().toString());
 						entity.setCategory(catRepository.findById(1L).get());
 						entity = repository.save(entity);
 						
-						return new DnaDTO(entity);
+				return new DnaDTO(entity);
+			}
+		}else {
+			return null;
 		}
 	}
 	
@@ -270,5 +295,6 @@ public class DnaService {
 		return result;		
 	
 	}
+	
 	
 }

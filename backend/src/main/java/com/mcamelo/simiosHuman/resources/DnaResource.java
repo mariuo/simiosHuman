@@ -28,7 +28,6 @@ public class DnaResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	
 	/*
 	@PostMapping
 	public ResponseEntity<DnaDTO> insert(@RequestBody DnaTestDTO dto){
@@ -37,22 +36,16 @@ public class DnaResource {
 				.buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
-	
-	@PostMapping
-	public ResponseEntity<String> insert(@RequestBody String desc){
-		service.tryInsert(desc);
-		return ResponseEntity.ok().body("Ok");
-	}
 	*/
 	@PostMapping(consumes = "application/json", produces = "application/json")
 	public ResponseEntity<DnaDTO> isSimian(@RequestBody DnaTestDTO dto){
 		DnaDTO result = service.isSimian(dto);
-		var resu = ResponseEntity.status(403).body(service.isSimian(dto));
+		var resu = ResponseEntity.status(403).body(result);
 		if(result != null) {
 			if(result.getCategoryName().contains("Simios"))
-				resu = ResponseEntity.status(200).body(service.isSimian(dto));
+				resu = ResponseEntity.status(200).body(result);
 			else {
-				resu = ResponseEntity.status(403).body(service.isSimian(dto));
+				resu = ResponseEntity.status(403).body(result);
 			}
 		 
 		}
