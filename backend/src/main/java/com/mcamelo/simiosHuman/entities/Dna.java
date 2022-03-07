@@ -8,9 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.mcamelo.simiosHuman.entities.enums.DnaType;
 
 @Entity
 @Table(name = "tb_dna")
@@ -24,20 +24,20 @@ public class Dna implements Serializable{
 	@Column(columnDefinition = "TEXT")
 	private String name;
 	
-	@ManyToOne
-	@JoinColumn(name = "category_id")
-	private Category category;
+	private DnaType dnaType;
 	
 	public Dna() {
 		
 	}
 
-	public Dna(Long id, String name, Category category) {
+	
+	public Dna(Long id, String name, DnaType dnaType) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.category = category;
+		this.dnaType = dnaType;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -55,13 +55,15 @@ public class Dna implements Serializable{
 		this.name = name;
 	}
 
-	public Category getCategory() {
-		return category;
+	
+	public DnaType getDnaType() {
+		return dnaType;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setDnaType(DnaType dnaType) {
+		this.dnaType = dnaType;
 	}
+
 
 	@Override
 	public int hashCode() {

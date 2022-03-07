@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mcamelo.simiosHuman.dtos.DnaDTO;
 import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
+import com.mcamelo.simiosHuman.entities.enums.DnaType;
 import com.mcamelo.simiosHuman.services.DnaService;
 
 @RestController
@@ -42,7 +43,7 @@ public class DnaResource {
 		DnaDTO result = service.isSimian(dto);
 		var resu = ResponseEntity.status(403).body(result);
 		if(result != null) {
-			if(result.getCategoryName().contains("Simios"))
+			if(result.getDnaType() == DnaType.SIMIOS)
 				resu = ResponseEntity.status(200).body(result);
 			else {
 				resu = ResponseEntity.status(403).body(result);

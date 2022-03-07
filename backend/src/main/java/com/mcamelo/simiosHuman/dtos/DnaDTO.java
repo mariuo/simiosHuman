@@ -3,6 +3,7 @@ package com.mcamelo.simiosHuman.dtos;
 import java.io.Serializable;
 
 import com.mcamelo.simiosHuman.entities.Dna;
+import com.mcamelo.simiosHuman.entities.enums.DnaType;
 
 public class DnaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -10,20 +11,20 @@ public class DnaDTO implements Serializable{
 	private Long id;
 	private String name;
 	
-	private String categoryName;
+	private DnaType dnaType;
 	
 	public DnaDTO() {
 		
 	}
-	public DnaDTO(Long id, String name, String categoryName) {
+	public DnaDTO(Long id, String name, DnaType dnaType) {
 		this.id = id;
 		this.name = name;
-		this.categoryName = categoryName;
+		this.dnaType = dnaType;
 	}
 	public DnaDTO(Dna entity) {
 		id = entity.getId();
 		name = entity.getName();
-		categoryName = entity.getCategory().getName();
+		dnaType = entity.getDnaType();
 	}
 	public Long getId() {
 		return id;
@@ -37,11 +38,12 @@ public class DnaDTO implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCategoryName() {
-		return categoryName;
+	public DnaType getDnaType() {
+		return dnaType;
 	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setDnaType(DnaType dnaType) {
+		this.dnaType = dnaType;
 	}
+	
 	
 }
