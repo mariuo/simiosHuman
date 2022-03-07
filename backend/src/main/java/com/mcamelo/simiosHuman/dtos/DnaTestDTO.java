@@ -24,10 +24,5 @@ public class DnaTestDTO implements Serializable{
 
 	public void setDna(List<String> dna) {
 		this.dna = dna;
-	}
-	
-	
-	
-	
-	
+	}	
 }

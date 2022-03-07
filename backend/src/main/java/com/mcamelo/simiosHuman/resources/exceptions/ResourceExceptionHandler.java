@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.mcamelo.simiosHuman.services.exceptions.DatabaseException;
+import com.mcamelo.simiosHuman.services.exceptions.InvalideMatrixException;
 import com.mcamelo.simiosHuman.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -67,13 +68,13 @@ public class ResourceExceptionHandler {
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
-	@ExceptionHandler(NullPointerException.class)
-	public ResponseEntity<StandardError> illegalArgument(NullPointerException e, HttpServletRequest request){
+	@ExceptionHandler(InvalideMatrixException.class)
+	public ResponseEntity<StandardError> InvalideMatrixException(InvalideMatrixException e, HttpServletRequest request){
 		HttpStatus status = HttpStatus.FORBIDDEN;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("No matrix NxN");
+		err.setError("Matrix invalide: No N x N");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);

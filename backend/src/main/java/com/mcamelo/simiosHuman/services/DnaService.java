@@ -13,7 +13,7 @@ import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
 import com.mcamelo.simiosHuman.entities.Dna;
 import com.mcamelo.simiosHuman.entities.enums.DnaType;
 import com.mcamelo.simiosHuman.repositories.DnaRepository;
-import com.mcamelo.simiosHuman.services.exceptions.ResourceNotFoundException;
+import com.mcamelo.simiosHuman.services.exceptions.InvalideMatrixException;
 
 @Service
 public class DnaService {
@@ -24,21 +24,13 @@ public class DnaService {
 	@Autowired
 	private ValidateMatrix validate;
 	
-	@Transactional(readOnly = true)
-	public List<DnaDTO> findAll(){
-		List<Dna> list = repository.findAll();		
-		
-		return list.stream().map(x -> new DnaDTO(x)).collect(Collectors.toList());
-	}
-	
 	@Transactional
 	public DnaDTO isSimian(DnaTestDTO dto) {
 		
 		if(!validate.checkMatrixNN(dto)) {
-			new ResourceNotFoundException("Entity not found");
+			throw new InvalideMatrixException("Matrix Invalide!");
 		}
 		
-		//checkMatrixNN(dto);
 		if(validate.convertMatrix(dto) != null) {
 			String[][] mat = validate.convertMatrix(dto);
 		
@@ -51,7 +43,8 @@ public class DnaService {
 			
 				return new DnaDTO(entity);
 					
-			}else {
+			}
+			else {
 			// Insert DNA in database as Human Category=1
 						Dna entity = new Dna();
 						entity.setName(dto.getDna().toString());
@@ -64,5 +57,9 @@ public class DnaService {
 			return null;
 		}
 	}	
-	
+	@Transactional(readOnly = true)
+	public List<DnaDTO> findAll(){
+		List<Dna> list = repository.findAll();		
+		return list.stream().map(x -> new DnaDTO(x)).collect(Collectors.toList());
+	}
 }

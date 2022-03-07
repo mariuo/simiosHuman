@@ -7,7 +7,7 @@ import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
 @Component
 public class ValidateMatrix {
 	
-	public static String[][] convertMatrix(DnaTestDTO dto) {
+	public String[][] convertMatrix(DnaTestDTO dto) {
 		int lines = dto.getDna().size();
 		int col = dto.getDna().get(0).length();
 		
@@ -29,7 +29,7 @@ public class ValidateMatrix {
 		
 	}
 	
-	public static boolean checkMatrixNN(DnaTestDTO dto) {		
+	public boolean checkMatrixNN(DnaTestDTO dto) {		
 		int lines = dto.getDna().size();
 					
 		for(String item : dto.getDna()) {
@@ -40,7 +40,7 @@ public class ValidateMatrix {
 		return true;
 	}
 	
-	public static void view(String[][] matrix) {
+	public void view(String[][] matrix) {
 		int lines = matrix.length;
 		int col = lines;
 		
@@ -52,7 +52,7 @@ public class ValidateMatrix {
 		}
 	}
 	
-	public static boolean horizontal(String[][] matrix) {
+	public boolean horizontal(String[][] matrix) {
 		int lines = matrix.length;
 		int col = lines;
 		String temp;
@@ -88,7 +88,7 @@ public class ValidateMatrix {
 		return result;		
 	}
 	
-	public static boolean vertical(String[][] matrix) {
+	public boolean vertical(String[][] matrix) {
 		int lines = matrix.length;
 		int col = lines;
 		String temp;
@@ -139,7 +139,7 @@ public class ValidateMatrix {
 	
 	}
 	
-	public static boolean diagonal(String[][] matrix) {
+	public boolean diagonal(String[][] matrix) {
 		int lines = matrix.length;
 		int col = lines;
 		String temp;

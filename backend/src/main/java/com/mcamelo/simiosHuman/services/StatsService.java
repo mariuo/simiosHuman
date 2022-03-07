@@ -23,20 +23,24 @@ public class StatsService {
 	@Transactional(readOnly = true)
 	public StatsDTO result() {
 		int sim = 0, hum=0;
+		double score = 0.0;
 		List<Dna> list = repository.findAll();
-		for(Dna x : list) {
-			if(x.getDnaType() == DnaType.SIMIOS) {
-				sim++;
-				
-			}else {
-				hum++;
-				
+		if(list != null) {
+			for(Dna x : list) {
+				if(x.getDnaType() == DnaType.SIMIOS) {
+					sim++;
+					
+				}else {
+					hum++;
+					
+				}
 			}
-		}
-		Double score = (double)sim/(double)hum;
-		BigDecimal bd = new BigDecimal(score).setScale(1, RoundingMode.HALF_UP);
-		score = (double) bd.doubleValue();
-		System.out.println(score);
+			if(hum != 0) {
+				score = (double)sim/(double)hum;
+				BigDecimal bd = new BigDecimal(score).setScale(1, RoundingMode.HALF_UP);
+				score = (double) bd.doubleValue();
+			}
+		}		
 		return new StatsDTO(sim,hum,score);
 	}
 		
