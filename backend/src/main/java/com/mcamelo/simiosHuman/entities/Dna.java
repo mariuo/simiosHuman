@@ -22,7 +22,7 @@ public class Dna implements Serializable{
 	private Long id;
 	
 	@Column(columnDefinition = "TEXT")
-	private String name;
+	private String[][] name;
 	
 	private DnaType dnaType;
 	
@@ -31,7 +31,7 @@ public class Dna implements Serializable{
 	}
 
 	
-	public Dna(Long id, String name, DnaType dnaType) {
+	public Dna(Long id, String[][] name, DnaType dnaType) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -47,11 +47,11 @@ public class Dna implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String[][] getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String[][] name) {
 		this.name = name;
 	}
 

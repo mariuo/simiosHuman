@@ -7,37 +7,28 @@ import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
 @Component
 public class ValidateMatrix {
 	
-	public String[][] convertMatrix(DnaTestDTO dto) {
-		int lines = dto.getDna().size();
-		int col = dto.getDna().get(0).length();
-		
-		if(checkMatrixNN(dto)) {			
-			String[][] matrizDna = new String[lines] [col];
-			
-			for(int x = 0; x<lines; x++) {
-				for(int y = 0; y<col; y++) {
-					matrizDna[x][y] = (dto.getDna().get(x).charAt(y)+"").toUpperCase();
+	public String[][] convertMatrix(String[] dnaArray) {
+		int lines = dnaArray.length;
+		int col = dnaArray[0].length();
+		String[][] matrizDna = new String[lines] [col];
+		for(int x = 0; x<lines; x++) {
+			for(int y = 0; y<col; y++) {
+				matrizDna[x][y] = (dnaArray[x].charAt(y)+"").toUpperCase();
 				}
 			}
 			//view(matrizDna);
 			return matrizDna;
 			
-		}else {
-			System.out.println("NAO É NXN");
-			return null;
-			}
-		
-	}
-	
-	public boolean checkMatrixNN(DnaTestDTO dto) {		
-		int lines = dto.getDna().size();
-					
-		for(String item : dto.getDna()) {
-			if(item.length() != lines) {
+		}
+			
+	public boolean checkMatrixNN(String[] dna) {		
+		int lines = dna.length;
+		for(int x=0; x<dna.length; x++) {
+			if(dna[x].length() != lines ) {
 				return false;
 			}
 		}
-		return true;
+		return true;		
 	}
 	
 	public void view(String[][] matrix) {

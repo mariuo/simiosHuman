@@ -25,19 +25,19 @@ public class DnaService {
 	private ValidateMatrix validate;
 	
 	@Transactional
-	public boolean isSimian(DnaTestDTO dto) {
+	public boolean isSimian(String[] dnaArray) {
 		
-		if(!validate.checkMatrixNN(dto)) {
+		if(!validate.checkMatrixNN(dnaArray)) {
 			throw new InvalideMatrixException("Matrix Invalide!");
 		}
 		
-		if(validate.convertMatrix(dto) != null) {
-			String[][] mat = validate.convertMatrix(dto);
+		if(validate.convertMatrix(dnaArray) != null) {
+			String[][] mat = validate.convertMatrix(dnaArray);
 		
 			if (validate.horizontal(mat) || validate.vertical(mat) || validate.diagonal(mat)) {
 			// Insert DNA in database as Simios
 				Dna entity = new Dna();
-				entity.setName(dto.getDna().toString());
+				entity.setName(mat);
 				entity.setDnaType(DnaType.SIMIOS);
 				entity = repository.save(entity);
 			
@@ -47,7 +47,7 @@ public class DnaService {
 			else {
 			// Insert DNA in database as Human Category=1
 						Dna entity = new Dna();
-						entity.setName(dto.getDna().toString());
+						entity.setName(mat);
 						entity.setDnaType(DnaType.HUMAN);
 						entity = repository.save(entity);
 						

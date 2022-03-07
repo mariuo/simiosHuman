@@ -7,22 +7,24 @@ import java.util.List;
 public class DnaTestDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private List<String> dna = new ArrayList<>();
+	private String[] dna;
 	
 	public DnaTestDTO() {
 		
 	}
 
-	public DnaTestDTO(List<String> dna) {
+	public DnaTestDTO(String[] dna) {
 		super();
 		this.dna = dna;
 	}
 
-	public List<String> getDna() {
+	public String[] getDna() {
 		return dna;
 	}
 
-	public void setDna(List<String> dna) {
+	public void setDna(String[] dna) {
 		this.dna = dna;
-	}	
+	}
+
+	
 }

@@ -23,7 +23,7 @@ public class DnaDTO implements Serializable{
 	}
 	public DnaDTO(Dna entity) {
 		id = entity.getId();
-		name = entity.getName();
+		name = entity.getName().toString();
 		dnaType = entity.getDnaType();
 	}
 	public Long getId() {
