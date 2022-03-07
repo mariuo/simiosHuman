@@ -37,7 +37,7 @@ public class DnaService {
 			if (validate.horizontal(mat) || validate.vertical(mat) || validate.diagonal(mat)) {
 			// Insert DNA in database as Simios
 				Dna entity = new Dna();
-				entity.setName(mat);
+				entity.setSequence(validate.convertToString(mat));
 				entity.setDnaType(DnaType.SIMIOS);
 				entity = repository.save(entity);
 			
@@ -47,7 +47,7 @@ public class DnaService {
 			else {
 			// Insert DNA in database as Human Category=1
 						Dna entity = new Dna();
-						entity.setName(mat);
+						entity.setSequence(validate.convertToString(mat));
 						entity.setDnaType(DnaType.HUMAN);
 						entity = repository.save(entity);
 						

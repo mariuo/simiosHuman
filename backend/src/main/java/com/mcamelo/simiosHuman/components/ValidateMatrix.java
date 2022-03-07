@@ -20,6 +20,24 @@ public class ValidateMatrix {
 			return matrizDna;
 			
 		}
+	public String convertToString(String[][] matrizDna) {
+		int lines = matrizDna.length;
+		int col = lines;
+		String dnaString = "[";
+		for(int x = 0; x <lines; x++) {
+			for(int y = 0; y <col; y++) {
+				
+				dnaString = dnaString.concat(matrizDna[x][y]);
+			}
+			if(x < lines-1) {
+				dnaString = dnaString.concat(", ");
+
+			}
+			//System.out.println("");
+		}
+		dnaString= dnaString.concat("]");
+		return dnaString;
+	}
 			
 	public boolean checkMatrixNN(String[] dna) {		
 		int lines = dna.length;

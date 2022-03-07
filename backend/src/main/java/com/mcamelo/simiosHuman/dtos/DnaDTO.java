@@ -9,21 +9,21 @@ public class DnaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	private String name;
+	private String sequence;
 	
 	private DnaType dnaType;
 	
 	public DnaDTO() {
 		
 	}
-	public DnaDTO(Long id, String name, DnaType dnaType) {
+	public DnaDTO(Long id, String sequence, DnaType dnaType) {
 		this.id = id;
-		this.name = name;
+		this.sequence = sequence;
 		this.dnaType = dnaType;
 	}
 	public DnaDTO(Dna entity) {
 		id = entity.getId();
-		name = entity.getName().toString();
+		sequence = entity.getSequence();
 		dnaType = entity.getDnaType();
 	}
 	public Long getId() {
@@ -32,11 +32,11 @@ public class DnaDTO implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getSequence() {
+		return sequence;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setSequence(String sequence) {
+		this.sequence = sequence;
 	}
 	public DnaType getDnaType() {
 		return dnaType;
