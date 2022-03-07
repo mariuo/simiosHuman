@@ -25,7 +25,7 @@ public class DnaService {
 	private ValidateMatrix validate;
 	
 	@Transactional
-	public DnaDTO isSimian(DnaTestDTO dto) {
+	public boolean isSimian(DnaTestDTO dto) {
 		
 		if(!validate.checkMatrixNN(dto)) {
 			throw new InvalideMatrixException("Matrix Invalide!");
@@ -41,7 +41,7 @@ public class DnaService {
 				entity.setDnaType(DnaType.SIMIOS);
 				entity = repository.save(entity);
 			
-				return new DnaDTO(entity);
+				return true;
 					
 			}
 			else {
@@ -51,10 +51,10 @@ public class DnaService {
 						entity.setDnaType(DnaType.HUMAN);
 						entity = repository.save(entity);
 						
-				return new DnaDTO(entity);
+				return false;
 			}
 		}else {
-			return null;
+			return false;
 		}
 	}	
 	@Transactional(readOnly = true)

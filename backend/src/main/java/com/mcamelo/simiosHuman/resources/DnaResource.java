@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mcamelo.simiosHuman.dtos.DnaDTO;
 import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
-import com.mcamelo.simiosHuman.entities.enums.DnaType;
 import com.mcamelo.simiosHuman.services.DnaService;
 
 @RestController
@@ -22,35 +21,23 @@ public class DnaResource {
 	@Autowired
 	private DnaService service;
 	
+	@PostMapping(consumes = "application/json", produces = "application/json")
+	public ResponseEntity isSimian(@RequestBody DnaTestDTO dto){
+		boolean result = service.isSimian(dto);
+		var resu = ResponseEntity.status(403).build();
+		if(result) {
+			resu = ResponseEntity.status(200).build();
+		}else {
+			resu = ResponseEntity.status(403).build();
+		}
+		return resu;
+	}
+	
 	@GetMapping
 	public ResponseEntity<List<DnaDTO>> findAll(){
 		//List<CategoryDTO> listDto = service.findAll();
 		List<DnaDTO> list = service.findAll();		
 		return ResponseEntity.ok().body(list);
-	}
-	
-	/*
-	@PostMapping
-	public ResponseEntity<DnaDTO> insert(@RequestBody DnaTestDTO dto){
-		dto = service.tryInsert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
-	}
-	*/
-	@PostMapping(consumes = "application/json", produces = "application/json")
-	public ResponseEntity<DnaDTO> isSimian(@RequestBody DnaTestDTO dto){
-		DnaDTO result = service.isSimian(dto);
-		var resu = ResponseEntity.status(403).body(result);
-		if(result != null) {
-			if(result.getDnaType() == DnaType.SIMIOS)
-				resu = ResponseEntity.status(200).body(result);
-			else {
-				resu = ResponseEntity.status(403).body(result);
-			}
-		 
-		}
-		return resu;
 	}
 	
 
