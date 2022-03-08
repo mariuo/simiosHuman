@@ -6,7 +6,7 @@ https://simioshuman.herokuapp.com/
 simiosHuman is an API from a challenge test of Mercado Livre company. This was translated for me to attache in gitHub.
 
 
-## Challenge
+# Challenge
 In the distant future, in the chain of evolution, apes and humans are closer and closer. For this reason, it became very difficult to distinguish who is human and who is mutant.
 
 You are a scientist hired to develop a project that detects whether a DNA sequence belongs to a human or a mutant.
@@ -17,7 +17,7 @@ boolean isSimian (String[] dna)
 
 You will receive as a parameter an array of Strings that represent each row of a square table of (NxN) with the DNA sequence.
 
-![Web 1](https://github.com/mariuo/simioshuman/dna.png)
+![Web 1](https://raw.githubusercontent.com/mariuo/simiosHuman/main/dna.png)
 Human / mutant.
 
 The letters of the String can only be: (A, T, C, G), which represents each nitrogenous base of DNA.
@@ -63,7 +63,6 @@ valid and invalid arrays.
 
 
 # Technologies
-## MVC, Rest
 ## Back end
 - Java
 - Spring Boot
