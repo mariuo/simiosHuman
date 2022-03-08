@@ -70,7 +70,7 @@ public class ResourceExceptionHandler {
 	}
 	@ExceptionHandler(InvalideMatrixException.class)
 	public ResponseEntity<StandardError> InvalideMatrixException(InvalideMatrixException e, HttpServletRequest request){
-		HttpStatus status = HttpStatus.FORBIDDEN;
+		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());

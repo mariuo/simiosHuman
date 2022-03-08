@@ -21,7 +21,7 @@ public class StatsService {
 	
 	
 	@Transactional(readOnly = true)
-	public StatsDTO result() {
+	public StatsDTO getStats() {
 		int sim = 0, hum=0;
 		double score = 0.0;
 		List<Dna> list = repository.findAll();

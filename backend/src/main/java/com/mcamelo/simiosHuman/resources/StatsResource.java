@@ -17,9 +17,9 @@ public class StatsResource {
 	private StatsService service;
 	
 	@GetMapping
-	public ResponseEntity<StatsDTO> result(){
+	public ResponseEntity<StatsDTO> getStats(){
 		//List<CategoryDTO> listDto = service.findAll();
-		StatsDTO dto = service.result();		
+		StatsDTO dto = service.getStats();		
 		return ResponseEntity.ok().body(dto);
 	}
 }

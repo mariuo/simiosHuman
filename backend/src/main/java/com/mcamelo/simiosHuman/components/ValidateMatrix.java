@@ -49,18 +49,6 @@ public class ValidateMatrix {
 		return true;		
 	}
 	
-	public void view(String[][] matrix) {
-		int lines = matrix.length;
-		int col = lines;
-		
-		for(int x = 0; x <lines; x++) {
-			for(int y = 0; y <col; y++) {
-				System.out.print(matrix[x][y]+" ");
-			}
-			System.out.println("");
-		}
-	}
-	
 	public boolean horizontal(String[][] matrix) {
 		int lines = matrix.length;
 		int col = lines;
@@ -226,6 +214,17 @@ public class ValidateMatrix {
 			count=1;
 		}
 		return result;		
+	}
+	public void view(String[][] matrix) {
+		int lines = matrix.length;
+		int col = lines;
+		
+		for(int x = 0; x <lines; x++) {
+			for(int y = 0; y <col; y++) {
+				System.out.print(matrix[x][y]+" ");
+			}
+			System.out.println("");
+		}
 	}
 	
 }
