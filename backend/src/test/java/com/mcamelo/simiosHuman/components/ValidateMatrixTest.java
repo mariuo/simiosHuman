@@ -99,9 +99,7 @@ public class ValidateMatrixTest {
 		Assertions.assertEquals(expect, result);
 	}
 	@Test
-	public void convertMatrixShouldReturnMatrixBidimentional() {
-		
-	
+	public void convertMatrixShouldReturnMatrixBidimentional() {	
 		
 		String[][] result = validate.convertMatrix(dnaSimian2);
 		

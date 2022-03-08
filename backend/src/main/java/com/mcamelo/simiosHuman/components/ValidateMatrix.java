@@ -1,11 +1,15 @@
 package com.mcamelo.simiosHuman.components;
 
+import java.util.Arrays;
+
 import org.springframework.stereotype.Component;
 
 import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
 
 @Component
 public class ValidateMatrix {
+	
+	private static String[] LETTERS = {"A","G","T","C"};
 	
 	public String[][] convertMatrix(String[] dnaArray) {
 		int lines = dnaArray.length;
@@ -41,12 +45,24 @@ public class ValidateMatrix {
 			
 	public boolean checkMatrixNN(String[] dna) {		
 		int lines = dna.length;
+		String str;
+		boolean resu = false;
 		for(int x=0; x<dna.length; x++) {
 			if(dna[x].length() != lines ) {
 				return false;
 			}
 		}
-		return true;		
+		
+		for(int x = 0; x <lines; x++) {
+			for(int y = 0; y <lines; y++) {
+				str = dna[x].charAt(y)+"".toUpperCase();
+				
+				if(!Arrays.asList(LETTERS).contains(str)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	public boolean horizontal(String[][] matrix) {
