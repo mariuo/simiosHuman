@@ -1,16 +1,9 @@
 package com.mcamelo.simiosHuman.entities;
 
+import com.mcamelo.simiosHuman.entities.enums.DnaType;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.mcamelo.simiosHuman.entities.enums.DnaType;
 
 @Entity
 @Table(name = "tb_dna")
@@ -30,14 +23,12 @@ public class Dna implements Serializable{
 		
 	}
 
-	
 	public Dna(Long id, String sequence, DnaType dnaType) {
 		super();
 		this.id = id;
 		this.sequence =sequence;
 		this.dnaType = dnaType;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -55,7 +46,6 @@ public class Dna implements Serializable{
 		this.sequence = sequence;
 	}
 
-	
 	public DnaType getDnaType() {
 		return dnaType;
 	}
@@ -63,7 +53,6 @@ public class Dna implements Serializable{
 	public void setDnaType(DnaType dnaType) {
 		this.dnaType = dnaType;
 	}
-
 
 	@Override
 	public int hashCode() {

@@ -64,12 +64,16 @@ public class ValidateMatrix {
 		}
 		return true;
 	}
-	
+
+	/**
+	 *
+	 * @param matrix
+	 * @return
+	 */
 	public boolean horizontal(String[][] matrix) {
 		int lines = matrix.length;
 		int col = lines;
 		String temp;
-		//String achou;
 		boolean result = false;
 		int y=0, x=0, qnt=0, count=1;
 		for(x=0 ;  x<lines ; x++) {

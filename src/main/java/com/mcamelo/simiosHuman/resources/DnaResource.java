@@ -21,7 +21,7 @@ public class DnaResource {
 	@Autowired
 	private DnaService service;
 	
-	@PostMapping(consumes = "application/json", produces = "application/json")
+	@PostMapping
 	public ResponseEntity isSimian(@RequestBody DnaTestDTO dto){
 		boolean result = service.isSimian(dto.getDna());
 		var resu = ResponseEntity.status(403).build();
