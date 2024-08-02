@@ -1,10 +1,13 @@
 package com.mcamelo.simiosHuman.resources;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.mcamelo.simiosHuman.factory.DnaFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,21 +29,23 @@ public class DnaResourceTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@Mock
+	@InjectMocks
 	private DnaService service;
-	
-	
+
 	@Autowired
 	private ObjectMapper objectMapper;
 	
 	private String[] dnaSimian = {"CTGAGA", "CTATGA", "TATTGA", "AGAGGA", "CCCCTA", "TGAAAA"};
-	private String[] dnaHuman = {"ATGCGA", "CAGTGC", "TTATTT", "AGACGG","GCGTCA" ,"GCGTCA"};
+	private String[] dnaHuman = {"ATGCGA", "CAGTGC", "TTATTT", "AGACGG","GCGTCA","GCGTCA"};
 	private String[] dnaNotValid = {"ATGCGA", "CAGTGC", "TTATTT"};
+
+
 	@BeforeEach
 	void setUp() throws Exception{
-		//when(service.isSimian(dnaSimian)).thenReturn(Boolean.TRUE);
-		//when(service.isSimian(dnaHuman)).thenReturn(Boolean.FALSE);
-		//when(service.isSimian(dnaNotValid)).thenReturn(Boolean.FALSE);
+
+		when(service.isSimian(dnaSimian)).thenReturn(Boolean.TRUE);
+		when(service.isSimian(dnaHuman)).thenReturn(Boolean.FALSE);
+		when(service.isSimian(dnaNotValid)).thenReturn(Boolean.FALSE);
 	}
 
 	@Test
@@ -55,11 +60,11 @@ public class DnaResourceTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON));
 		//Assert
-		result.andExpect(status().isOk());	
+		result.andExpect(status().isOk());
     }
 	
 	@Test
-	public void isHumanCorrectDnashouldReturn403() throws Exception {
+	public void isHumanCorrectDnaShouldReturn403() throws Exception {
 		//Arrange		
 		DnaTestDTO dto = new DnaTestDTO(dnaHuman);
 		String jsonBody = objectMapper.writeValueAsString(dto);

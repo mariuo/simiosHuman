@@ -6,9 +6,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.mcamelo.simiosHuman.factory.DnaFactory;
+import com.mcamelo.simiosHuman.repositories.DnaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +36,9 @@ public class StatsResourceTest {
 	
 	@Mock
 	private DnaService service;
-	
+
+	@Mock
+	private DnaRepository repository;
 	
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -45,15 +52,14 @@ public class StatsResourceTest {
 	@BeforeEach
 	void setUp() throws Exception{
 		when(service.isSimian(dnaSimian)).thenReturn(Boolean.TRUE);
+		Mockito.when(repository.save(ArgumentMatchers.any())).thenReturn(DnaFactory.createDnaSimios());
 		when(service.isSimian(dnaHuman)).thenReturn(Boolean.FALSE);
+
 		//when(service.isSimian(dnaNotValid)).thenReturn(Boolean.FALSE);
 	}
 
 	@Test
 	public void getStatsShouldReturnStatus200WhenNoData() throws Exception {
-		
-		
-		
 		//Act
 		ResultActions result = mockMvc.perform(get("/stats")
 					.accept(MediaType.APPLICATION_JSON));

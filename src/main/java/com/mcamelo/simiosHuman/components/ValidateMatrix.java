@@ -1,10 +1,8 @@
 package com.mcamelo.simiosHuman.components;
 
-import java.util.Arrays;
-
 import org.springframework.stereotype.Component;
 
-import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
+import java.util.Arrays;
 
 @Component
 public class ValidateMatrix {
@@ -46,7 +44,6 @@ public class ValidateMatrix {
 	public boolean checkMatrixNN(String[] dna) {		
 		int lines = dna.length;
 		String str;
-		boolean resu = false;
 		for(int x=0; x<dna.length; x++) {
 			if(dna[x].length() != lines ) {
 				return false;

@@ -10,12 +10,8 @@ public class DnaDTO implements Serializable{
 	
 	private Long id;
 	private String sequence;
-	
 	private DnaType dnaType;
-	
-	public DnaDTO() {
-		
-	}
+	public DnaDTO() {}
 	public DnaDTO(Long id, String sequence, DnaType dnaType) {
 		this.id = id;
 		this.sequence = sequence;
