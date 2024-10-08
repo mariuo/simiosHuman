@@ -2,6 +2,8 @@ package com.mcamelo.simiosHuman.factory;
 
 import com.mcamelo.simiosHuman.dtos.DnaDTO;
 import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
+import com.mcamelo.simiosHuman.dtos.StatsDTO;
+import com.mcamelo.simiosHuman.dtos.StatsResponse;
 import com.mcamelo.simiosHuman.entities.Dna;
 import com.mcamelo.simiosHuman.entities.enums.DnaType;
 
@@ -30,5 +32,8 @@ public class DnaFactory {
     public static DnaDTO createDnaDTOHuman(){
         return new DnaDTO(createDnaHuman());
     }
+
+    public static StatsDTO createStatsDTO() {return new StatsDTO(0,0,0.0);}
+    public static StatsResponse createStatsResponse() {return new StatsResponse(0,0,0.0);}
 
 }

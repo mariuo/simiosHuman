@@ -1,6 +1,5 @@
-package com.mcamelo.simiosHuman.components;
+package com.mcamelo.simiosHuman.services;
 
-import com.mcamelo.simiosHuman.dtos.DnaDTO;
 import com.mcamelo.simiosHuman.dtos.DnaResponse;
 import com.mcamelo.simiosHuman.entities.Dna;
 import com.mcamelo.simiosHuman.entities.enums.DnaType;

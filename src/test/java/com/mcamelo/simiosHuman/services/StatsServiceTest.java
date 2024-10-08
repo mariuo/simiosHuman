@@ -1,16 +1,13 @@
 package com.mcamelo.simiosHuman.services;
 
+import com.mcamelo.simiosHuman.dtos.StatsResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.mcamelo.simiosHuman.dtos.StatsDTO;
 
 @SpringBootTest
-@Transactional
 public class StatsServiceTest {
 	
 	@Autowired
@@ -24,7 +21,7 @@ public class StatsServiceTest {
 	@Test
 	public void getStatsShouldReturnStatsDTO() throws Exception {
 		
-		StatsDTO result = service.getStats();
+		StatsResponse result = service.getStats();
 		
 		Assertions.assertNotNull(result);
 	}

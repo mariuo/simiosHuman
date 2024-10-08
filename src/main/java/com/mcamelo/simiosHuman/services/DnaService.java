@@ -1,19 +1,17 @@
 package com.mcamelo.simiosHuman.services;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.mcamelo.simiosHuman.components.ValidateMatrix;
 import com.mcamelo.simiosHuman.dtos.DnaDTO;
-import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
 import com.mcamelo.simiosHuman.entities.Dna;
 import com.mcamelo.simiosHuman.entities.enums.DnaType;
 import com.mcamelo.simiosHuman.repositories.DnaRepository;
 import com.mcamelo.simiosHuman.services.exceptions.InvalideMatrixException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DnaService {

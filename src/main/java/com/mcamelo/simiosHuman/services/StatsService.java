@@ -1,17 +1,16 @@
 package com.mcamelo.simiosHuman.services;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.List;
-
+import com.mcamelo.simiosHuman.dtos.StatsResponse;
+import com.mcamelo.simiosHuman.entities.Dna;
+import com.mcamelo.simiosHuman.entities.enums.DnaType;
+import com.mcamelo.simiosHuman.repositories.DnaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mcamelo.simiosHuman.dtos.StatsDTO;
-import com.mcamelo.simiosHuman.entities.Dna;
-import com.mcamelo.simiosHuman.entities.enums.DnaType;
-import com.mcamelo.simiosHuman.repositories.DnaRepository;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
 
 @Service
 public class StatsService {
@@ -19,9 +18,8 @@ public class StatsService {
 	@Autowired
 	private DnaRepository repository;
 	
-	
 	@Transactional(readOnly = true)
-	public StatsDTO getStats() {
+	public StatsResponse getStats() {
 		int sim = 0, hum=0;
 		double score = 0.0;
 		List<Dna> list = repository.findAll();
@@ -32,7 +30,6 @@ public class StatsService {
 					
 				}else {
 					hum++;
-					
 				}
 			}
 			if(hum != 0) {
@@ -41,7 +38,7 @@ public class StatsService {
 				score = (double) bd.doubleValue();
 			}
 		}		
-		return new StatsDTO(sim,hum,score);
+		return new StatsResponse(sim,hum,score);
 	}
 		
 	
