@@ -23,7 +23,7 @@ public class DnaRepositoryTest {
         Assertions.assertTrue(all.iterator().hasNext(), "There should be some data");
     }
 
-//    @Test
+    @Test
     public void ShouldBeNoData() throws Exception{
         Assertions.assertFalse(dnaRepository.findAll().iterator().hasNext(), () -> "There should be no data");
     }
