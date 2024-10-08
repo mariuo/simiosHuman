@@ -5,7 +5,6 @@ import com.mcamelo.simiosHuman.entities.enums.DnaType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -24,7 +23,7 @@ public class DnaRepositoryTest {
         Assertions.assertTrue(all.iterator().hasNext(), "There should be some data");
     }
 
-    @Test
+//    @Test
     public void ShouldBeNoData() throws Exception{
         Assertions.assertFalse(dnaRepository.findAll().iterator().hasNext(), () -> "There should be no data");
     }

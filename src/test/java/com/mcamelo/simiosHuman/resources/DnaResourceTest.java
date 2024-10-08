@@ -1,36 +1,31 @@
 package com.mcamelo.simiosHuman.resources;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mcamelo.simiosHuman.dtos.DnaRequest;
+import com.mcamelo.simiosHuman.services.DnaValidationService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.mcamelo.simiosHuman.factory.DnaFactory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
-import com.mcamelo.simiosHuman.services.DnaService;
-
 @SpringBootTest
-@Transactional
 @AutoConfigureMockMvc
 public class DnaResourceTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@InjectMocks
-	private DnaService service;
+	@MockBean
+	private DnaValidationService service;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -43,15 +38,14 @@ public class DnaResourceTest {
 	@BeforeEach
 	void setUp() throws Exception{
 
-		when(service.isSimian(dnaSimian)).thenReturn(Boolean.TRUE);
-		when(service.isSimian(dnaHuman)).thenReturn(Boolean.FALSE);
-		when(service.isSimian(dnaNotValid)).thenReturn(Boolean.FALSE);
 	}
 
 	@Test
 	public void isSimianCorrectDnashouldReturn200() throws Exception {
 		//Arrange
-		DnaTestDTO dto = new DnaTestDTO(dnaSimian);
+		when(service.checkMatrixNN(dnaSimian)).thenReturn(Boolean.TRUE);
+		when(service.isValidSimian(dnaSimian)).thenReturn(Boolean.TRUE);
+		DnaRequest dto = new DnaRequest(dnaSimian);
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		//Act
@@ -65,8 +59,10 @@ public class DnaResourceTest {
 	
 	@Test
 	public void isHumanCorrectDnaShouldReturn403() throws Exception {
+		when(service.checkMatrixNN(dnaHuman)).thenReturn(Boolean.TRUE);
+		when(service.isValidSimian(dnaHuman)).thenReturn(Boolean.FALSE);
 		//Arrange		
-		DnaTestDTO dto = new DnaTestDTO(dnaHuman);
+		DnaRequest dto = new DnaRequest(dnaHuman);
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		//Act
@@ -79,7 +75,9 @@ public class DnaResourceTest {
     }
 	@Test
 	public void isSimianShouldReturn400WhenNotValidMatrix() throws Exception {
-		DnaTestDTO dto = new DnaTestDTO(dnaNotValid);
+		when(service.checkMatrixNN(dnaNotValid)).thenReturn(Boolean.FALSE);
+//		when(service.isValidSimian(dnaNotValid)).thenReturn(Boolean.FALSE);
+		DnaRequest dto = new DnaRequest(dnaNotValid);
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		//Act

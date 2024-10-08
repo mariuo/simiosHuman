@@ -1,7 +1,6 @@
 package com.mcamelo.simiosHuman.resources;
 
-import com.mcamelo.simiosHuman.components.DnaValidationService;
-import com.mcamelo.simiosHuman.dtos.DnaDTO;
+import com.mcamelo.simiosHuman.services.DnaValidationService;
 import com.mcamelo.simiosHuman.dtos.DnaRequest;
 import com.mcamelo.simiosHuman.dtos.DnaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +10,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/dna")
+@RequestMapping("/simian")
 public class DnaValidationController {
 
     @Autowired
     private DnaValidationService dnaValidationService;
 
-    @PostMapping("/validate")
-    public ResponseEntity<String> validateDna(@RequestBody DnaRequest dnaRequest) {
+    @PostMapping
+    public ResponseEntity<Void> validateDna(@RequestBody DnaRequest dnaRequest) {
+        if (dnaRequest == null || dnaRequest.dna() == null) {
+            return ResponseEntity.badRequest().build();
+        }
         if (!dnaValidationService.checkMatrixNN(dnaRequest.dna())) {
             return ResponseEntity.badRequest().build();
         }
-        if(dnaValidationService.isValidSimian(dnaRequest.dna())){
-            return ResponseEntity.ok().build();
-
-        }else{
-            return ResponseEntity.badRequest().build();
-
-        }
+        return dnaValidationService.isValidSimian(dnaRequest.dna()) ? ResponseEntity.ok().build() : ResponseEntity.status(403).build();
     }
     @GetMapping
     public ResponseEntity<List<DnaResponse>> findAll(){

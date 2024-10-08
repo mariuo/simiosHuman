@@ -15,7 +15,7 @@ import com.mcamelo.simiosHuman.dtos.DnaTestDTO;
 import com.mcamelo.simiosHuman.services.DnaService;
 
 @RestController
-@RequestMapping(value = "/simian")
+@RequestMapping(value = "/simian2")
 public class DnaResource {
 	
 	@Autowired
