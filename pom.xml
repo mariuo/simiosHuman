@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mcamelo</groupId>
-	<artifactId>simiosHuman</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>simioshuman</artifactId>
+	<version>1.1</version>
 	<name>simiosHuman</name>
 	<description>Project challenge</description>
 	<url/>
@@ -77,7 +77,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-docker-compose</artifactId>
-			<scope>runtime</scope>
+			<scope>test</scope>
 			<optional>true</optional>
 		</dependency>
 	</dependencies>

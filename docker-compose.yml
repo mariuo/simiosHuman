@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  simhum-postgres:
+    image: postgres:12-alpine
+    container_name: simhum-db-container
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - 5432:5432
+    volumes:
+      - simhum-db:/var/lib/postgres/data
+    networks:
+      - simhum-network
+
+  simhum-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: simioshuman-container
+    depends_on:
+      - simhum-postgres
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL
+      - SPRING_DATASOURCE_USERNAME
+      - SPRING_DATASOURCE_PASSWORD
+      - SPRING_PROFILES_ACTIVE
+    networks:
+      - simhum-network
+
+networks:
+  simhum-network:
+    driver: bridge
+
+volumes:
+  simhum-db: # Define a named volume for MySQL data persistence
