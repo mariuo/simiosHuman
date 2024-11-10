@@ -74,13 +74,13 @@ valid and invalid arrays.
 - Postman
 
 ## Production
-- Back end: Heroku
+- Back end: Docker-compose
 - DataBase: Postgres
 
 # How execute the project
 
 ## Back end
-Pré-requisitos: Java 17
+Pré-requisitos: Java 21
 
 ```bash
 # Clone repository
@@ -91,6 +91,29 @@ cd backend
 
 # Run
 ./mvnw spring-boot:run
+```
+## Commands
+Pré-requisitos: Java 21
+
+```bash
+#Variables env
+export DB_DATABASE=simioshumandb
+export DB_USER=simioshumanuser
+export DB_PASSWORD=simioshumanpass
+export APP_PROFILE=prod
+
+echo $DB_DATABASE
+echo $DB_USER
+echo $DB_PASSWORD
+echo $APP_PROFILE
+
+# Maven clean package
+mvn clean package
+
+# Get into docker-compose
+dcker-compose up -d
+
+
 ```
 
 # Author

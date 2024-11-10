@@ -56,7 +56,7 @@ public class DnaServiceTest {
 	@Test
 	public void testConvertMatrixWithValidInput() {
 		// Act
-		char[][] actualMatrix = service.convertMatrix(dnaSimian);
+		char[][] actualMatrix = service.convertToChar(dnaSimian);
 
 		// Assert
 		assertArrayEquals(dnaSimianChar, actualMatrix);
@@ -80,7 +80,7 @@ public class DnaServiceTest {
 		};
 
 		// Act
-		char[][] actualMatrix = service.convertMatrix(dnaArray);
+		char[][] actualMatrix = service.convertToChar(dnaArray);
 
 		// Assert
 		assertArrayEquals(expectedMatrix, actualMatrix);
@@ -88,13 +88,13 @@ public class DnaServiceTest {
 
 	@Test
 	public void methodCheckMatrixShouldReturnTrueWhenValidData() throws Exception{
-		boolean result = service.checkMatrixNN(dnaSimian);
+		boolean result = service.isMatrixNN(dnaSimian);
 		Assertions.assertEquals(true,result);
 	}
 
 	@Test
 	public void methodCheckMatrixShouldReturnFalseWhenInvalidData() throws Exception{
-		boolean result = service.checkMatrixNN(dnaNotValid);
+		boolean result = service.isMatrixNN(dnaNotValid);
 		Assertions.assertEquals(false, result);
 	}
 
@@ -112,13 +112,13 @@ public class DnaServiceTest {
 	@Test
 	public void isValidSimianShouldReturnTrueWhenSimian() throws Exception{
 		when(repo.save(ArgumentMatchers.any())).thenReturn(DnaFactory.createDnaSimios());
-		boolean result = service.isValidSimian(dnaSimian);
+		boolean result = service.isSimian(dnaSimian);
 		Assertions.assertEquals(true, result);
 	}
 	@Test
 	public void isValidSimianShouldReturnFalseWhenHuman() throws Exception{
 		when(repo.save(ArgumentMatchers.any())).thenReturn(DnaFactory.createDnaHuman());
-		boolean result = service.isValidSimian(dnaHuman);
+		boolean result = service.isSimian(dnaHuman);
 		Assertions.assertEquals(false, result);
 	}
 
