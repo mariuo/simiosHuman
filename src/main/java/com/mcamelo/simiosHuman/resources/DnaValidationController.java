@@ -21,10 +21,10 @@ public class DnaValidationController {
         if (dnaRequest == null || dnaRequest.dna() == null) {
             return ResponseEntity.badRequest().build();
         }
-        if (!dnaValidationService.checkMatrixNN(dnaRequest.dna())) {
+        if (!dnaValidationService.isMatrixNN(dnaRequest.dna())) {
             return ResponseEntity.badRequest().build();
         }
-        return dnaValidationService.isValidSimian(dnaRequest.dna()) ? ResponseEntity.ok().build() : ResponseEntity.status(403).build();
+        return dnaValidationService.isSimian(dnaRequest.dna()) ? ResponseEntity.ok().build() : ResponseEntity.status(403).build();
     }
     @GetMapping
     public ResponseEntity<List<DnaResponse>> findAll(){

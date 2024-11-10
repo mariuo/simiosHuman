@@ -43,8 +43,8 @@ public class DnaResourceTest {
 	@Test
 	public void isSimianCorrectDnashouldReturn200() throws Exception {
 		//Arrange
-		when(service.checkMatrixNN(dnaSimian)).thenReturn(Boolean.TRUE);
-		when(service.isValidSimian(dnaSimian)).thenReturn(Boolean.TRUE);
+		when(service.isMatrixNN(dnaSimian)).thenReturn(Boolean.TRUE);
+		when(service.isSimian(dnaSimian)).thenReturn(Boolean.TRUE);
 		DnaRequest dto = new DnaRequest(dnaSimian);
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
@@ -59,8 +59,8 @@ public class DnaResourceTest {
 	
 	@Test
 	public void isHumanCorrectDnaShouldReturn403() throws Exception {
-		when(service.checkMatrixNN(dnaHuman)).thenReturn(Boolean.TRUE);
-		when(service.isValidSimian(dnaHuman)).thenReturn(Boolean.FALSE);
+		when(service.isMatrixNN(dnaHuman)).thenReturn(Boolean.TRUE);
+		when(service.isSimian(dnaHuman)).thenReturn(Boolean.FALSE);
 		//Arrange		
 		DnaRequest dto = new DnaRequest(dnaHuman);
 		String jsonBody = objectMapper.writeValueAsString(dto);
@@ -75,7 +75,7 @@ public class DnaResourceTest {
     }
 	@Test
 	public void isSimianShouldReturn400WhenNotValidMatrix() throws Exception {
-		when(service.checkMatrixNN(dnaNotValid)).thenReturn(Boolean.FALSE);
+		when(service.isMatrixNN(dnaNotValid)).thenReturn(Boolean.FALSE);
 //		when(service.isValidSimian(dnaNotValid)).thenReturn(Boolean.FALSE);
 		DnaRequest dto = new DnaRequest(dnaNotValid);
 		String jsonBody = objectMapper.writeValueAsString(dto);

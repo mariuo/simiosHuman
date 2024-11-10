@@ -4,6 +4,8 @@ import com.mcamelo.simiosHuman.dtos.DnaResponse;
 import com.mcamelo.simiosHuman.entities.Dna;
 import com.mcamelo.simiosHuman.entities.enums.DnaType;
 import com.mcamelo.simiosHuman.repositories.DnaRepository;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +17,16 @@ import java.util.stream.Collectors;
 public class DnaValidationService {
     private static final Set<Character> LETTERS = Set.of('A', 'G', 'T', 'C');
 
+    @Autowired
+    Logger log;
+
     private final DnaRepository dnaRepository;
 
     public DnaValidationService(DnaRepository dnaRepository) {
         this.dnaRepository = dnaRepository;
     }
 
-    public char[][] convertMatrix(String[] dnaArray) {
+    public char[][] convertToChar(String[] dnaArray) {
         int lines = dnaArray.length;
         int cols = dnaArray[0].length();
         char[][] matrizDna = new char[lines][cols];
@@ -31,16 +36,35 @@ public class DnaValidationService {
         return matrizDna;
     }
 
-    public boolean checkMatrixNN(String[] dna) {
+    public String convertToString(char[][] matrizDna) {
+        int rows = matrizDna.length;
+        int cols = matrizDna[0].length;
+        StringBuilder dnaString = new StringBuilder("[");
+
+        for (int x = 0; x < rows; x++) {
+            for (int y = 0; y < cols; y++) {
+                dnaString.append(matrizDna[x][y]);
+            }
+            if (x < rows - 1) {
+                dnaString.append(", ");
+            }
+        }
+        dnaString.append("]");
+        return dnaString.toString();
+    }
+
+    public boolean isMatrixNN(String[] dna) {
         int lines = dna.length;
         for (String s : dna) {
             if (s.length() != lines) {
+                log.info("Info: is not matrix linear.");
                 return false;
             }
         }
         for (String s : dna) {
             for (char c : s.toCharArray()) {
                 if (!LETTERS.contains(Character.toUpperCase(c))) {
+                    log.info("Info: is not matrix DNA.");
                     return false;
                 }
             }
@@ -59,7 +83,7 @@ public class DnaValidationService {
             Thread horizontalThread = new Thread(() -> checkHorizontal(matrix, lines, seqLength, found));
             Thread verticalThread = new Thread(() -> checkVertical(matrix, lines, seqLength, found));
             Thread diagonalThread = new Thread(() -> checkDiagonal(matrix, lines, seqLength, found));
-
+            log.info("Checking: ");
             horizontalThread.start();
             verticalThread.start();
             diagonalThread.start();
@@ -135,8 +159,8 @@ public class DnaValidationService {
             System.out.println();
         }
     }
-    public boolean isValidSimian(String[] dna) {
-        char[][] matrix = convertMatrix(dna);
+    public boolean isSimian(String[] dna) {
+        char[][] matrix = convertToChar(dna);
 
         Dna entity = new Dna();
         entity.setSequence(convertToString(matrix));
@@ -145,32 +169,17 @@ public class DnaValidationService {
             // Insert DNA in database as Simios
             entity.setDnaType(DnaType.SIMIOS);
             dnaRepository.save(entity);
+            log.info("Saved DNA: "+DnaType.SIMIOS);
             return true;
         }else{
             entity.setDnaType(DnaType.HUMAN);
             dnaRepository.save(entity);
+            log.info("Saved DNA: "+DnaType.HUMAN);
             return false;
         }
-    }
-    public String convertToString(char[][] matrizDna) {
-        int rows = matrizDna.length;
-        int cols = matrizDna[0].length;
-        StringBuilder dnaString = new StringBuilder("[");
-
-        for (int x = 0; x < rows; x++) {
-            for (int y = 0; y < cols; y++) {
-                dnaString.append(matrizDna[x][y]);
-            }
-            if (x < rows - 1) {
-                dnaString.append(", ");
-            }
-        }
-        dnaString.append("]");
-        return dnaString.toString();
     }
     public List<DnaResponse> findAll(){
         List<Dna> list = dnaRepository.findAll();
         return list.stream().map(x -> new DnaResponse(x.getId(), x.getSequence(), x.getDnaType())).collect(Collectors.toList());
     }
 }
-
