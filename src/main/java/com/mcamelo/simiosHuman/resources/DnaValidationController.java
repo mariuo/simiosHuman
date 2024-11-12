@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/simian")
-public class DnaValidationController {
+public class DnaValidationController implements DnaValidation {
 
     @Autowired
     private DnaValidationService dnaValidationService;
