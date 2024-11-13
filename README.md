@@ -116,6 +116,12 @@ dcker-compose up -d
 
 ```
 
+## Swagger mode=test and dev
+
+````
+http://localhost:8080/swagger-ui/index.html
+````
+
 # Author
 
 Mario Camelo
