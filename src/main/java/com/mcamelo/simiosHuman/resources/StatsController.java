@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/stats")
-public class StatsResource {
+public class StatsController implements Stats{
 	
 	@Autowired
 	private StatsService service;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-public interface DnaValidation extends ApiInfo {
+public interface DnaValidation extends InfoAPI {
     @Operation(summary = "Return all dna's saved.",
 
             responses = {
