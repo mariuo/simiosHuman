@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://172.18.0.2:5432/simioshumandb
+    username: simioshumanuser
+    password: simioshumanpass
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+
