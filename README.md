@@ -122,6 +122,11 @@ dcker-compose up -d
 http://localhost:8080/swagger-ui/index.html
 ````
 
+## Actuator health
+````
+http://localhost:8080/actuator/health
+````
+
 # Author
 
 Mario Camelo
