@@ -24,7 +24,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: create-drop
-#    show-sql: true
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
@@ -34,7 +34,3 @@ springdoc:
     path: /api-docs
     enabled: true
 
-#server:
-#  tomcat:
-#    threads:
-#      max: 10
