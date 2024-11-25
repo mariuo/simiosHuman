@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "d738f548-f1c7-4cd9-8113-12158939383b",
+		"name": "simiosHuman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14162640"
+	},
+	"item": [
+		{
+			"name": "simian findAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/simian",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"simian"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post simios",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dna\": [\"CTGAGA\", \"CTATGA\", \"TATTGA\", \"AGAGGA\", \"CCCCTA\", \"TGAAAA\"] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/simian",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"simian"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post simios 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dna\": [\"CTGAGA\", \"CTATGA\", \"TATTGA\", \"AGAGGA\", \"CCCCTA\", \"TGAAAA\"] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/simian",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"simian"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post simios BIG",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dna\": [\r\n    \"ATGCGATTGC\",\r\n    \"CAGTGCTAGC\",\r\n    \"TTATGTTGCA\",\r\n    \"AGAAGGCTGA\",\r\n    \"CCCCTAGTCA\",\r\n    \"TCACTGAGCT\",\r\n    \"GCTAGTCTGA\",\r\n    \"TGACTGCATA\",\r\n    \"CTAGCTGACT\",\r\n    \"AGTCAGTCAG\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/simian",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"simian"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post human",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dna\": [\"ATGCGA\", \"CAGTGC\", \"TTATTT\", \"AGACGG\",\"GCGTCA\" ,\"GCGTCA\"] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/simian",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"simian"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post human 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dna\": [\"ATGCGA\", \"CAGTGC\", \"TTATTT\", \"AGACGG\",\"GCGTCA\" ,\"GCGTCA\"] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/simian",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"simian"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post no matrix",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dna\": [\"ATGCGATA\", \"CATGATGC\", \"TTTAATTT\", \"AGTACAGG\",\"GCTAGTCA\" ,\"GCTGATCA\",\"GCTAGTCA\"] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/simian",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"simian"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/stats",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"stats"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

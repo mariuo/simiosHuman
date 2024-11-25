@@ -64,11 +64,12 @@ valid and invalid arrays.
 
 # Technologies
 ## Back end
-- Java
+- Java 21
 - Spring Boot
 - JPA / Hibernate
 - Maven
 - JUnit Vanila
+- Using Virtual Threads for a better performance.
 
 ## Front end
 - Postman
@@ -121,6 +122,27 @@ dcker-compose up -d
 ````
 http://localhost:8080/swagger-ui/index.html
 ````
+
+## Testing HEY or HTTPd
+```
+curl --location 'http://localhost:8080/simian' \
+--header 'Content-Type: application/json' \
+--data '{
+    "dna": ["CTGAGA", "CTATGA", "TATTGA", "AGAGGA", "CCCCTA", "TGAAAA"] 
+}'
+```
+- Simian
+```
+hey -n 32 -c 32 -m POST -T "application/json" -d '{"dna":["CTGAGA","CTATGA","TATTGA","AGAGGA","CCCCTA","TGAAAA"]}' http://localhost:8080/simian
+```
+- Human
+```
+hey -n 32 -c 32 -m POST -T "application/json" -d '{"dna": ["ATGCGA", "CAGTGC", "TTATTT", "AGACGG","GCGTCA" ,"GCGTCA"]}' http://localhost:8080/simian
+```
+- /get STATS
+```
+hey -n 100 -m GET http://localhost:8080/stats
+```
 
 # Author
 

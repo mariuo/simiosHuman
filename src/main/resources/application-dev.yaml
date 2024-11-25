@@ -1,4 +1,7 @@
 spring:
+  threads:
+    virtual:
+      enable: true
   datasource:
     url: jdbc:postgresql://172.18.0.2:5432/simioshumandb
     username: simioshumanuser
@@ -17,4 +20,3 @@ springdoc:
   api-docs:
     path: /api-docs
     enabled: true
-
