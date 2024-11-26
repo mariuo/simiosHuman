@@ -4,6 +4,7 @@ import com.mcamelo.simiosHuman.dtos.DnaResponse;
 import com.mcamelo.simiosHuman.entities.Dna;
 import com.mcamelo.simiosHuman.entities.enums.DnaType;
 import com.mcamelo.simiosHuman.repositories.DnaRepository;
+import com.mcamelo.simiosHuman.services.exceptions.DatabaseException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -165,17 +166,21 @@ public class DnaValidationService {
         Dna entity = new Dna();
         entity.setSequence(convertToString(matrix));
 
-        if(checkDnaMatrix(matrix)){
-            // Insert DNA in database as Simios
-            entity.setDnaType(DnaType.SIMIOS);
-            dnaRepository.save(entity);
-            log.info("Saved DNA: "+DnaType.SIMIOS);
-            return true;
-        }else{
-            entity.setDnaType(DnaType.HUMAN);
-            dnaRepository.save(entity);
-            log.info("Saved DNA: "+DnaType.HUMAN);
-            return false;
+        try {
+            if (checkDnaMatrix(matrix)) {
+                // Insert DNA in database as Simios
+                entity.setDnaType(DnaType.SIMIOS);
+                dnaRepository.save(entity);
+                log.info("Saved DNA: " + DnaType.SIMIOS);
+                return true;
+            } else {
+                entity.setDnaType(DnaType.HUMAN);
+                dnaRepository.save(entity);
+                log.info("Saved DNA: " + DnaType.HUMAN);
+                return false;
+            }
+        }catch (DatabaseException e){
+            throw new DatabaseException("Data base: " + e);
         }
     }
     public List<DnaResponse> findAll(){

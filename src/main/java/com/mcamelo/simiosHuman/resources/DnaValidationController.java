@@ -3,6 +3,7 @@ package com.mcamelo.simiosHuman.resources;
 import com.mcamelo.simiosHuman.services.DnaValidationService;
 import com.mcamelo.simiosHuman.dtos.DnaRequest;
 import com.mcamelo.simiosHuman.dtos.DnaResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class DnaValidationController implements DnaValidation {
     private DnaValidationService dnaValidationService;
 
     @PostMapping
-    public ResponseEntity<Void> validateDna(@RequestBody DnaRequest dnaRequest) {
+    public ResponseEntity<Void> validateDna(@Valid @RequestBody DnaRequest dnaRequest) {
         if (dnaRequest == null || dnaRequest.dna() == null) {
             return ResponseEntity.badRequest().build();
         }
