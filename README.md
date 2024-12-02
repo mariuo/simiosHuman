@@ -143,7 +143,10 @@ hey -n 32 -c 32 -m POST -T "application/json" -d '{"dna": ["ATGCGA", "CAGTGC", "
 ```
 hey -n 100 -m GET http://localhost:8080/stats
 ```
-
+- /get findAll
+```
+hey -n 100 -m GET http://localhost:8080/simian
+```
 # Author
 
 Mario Camelo
