@@ -14,6 +14,6 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-        ddl-auto: create-drop
+        ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 

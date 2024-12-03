@@ -1,7 +1,7 @@
-version: '3.8'
-
 services:
-  simhum-postgres:
+  db-simios:
+    networks:
+      - simhum-network
     image: postgres:12-alpine
     container_name: simhum-db-container
     environment:
@@ -12,16 +12,18 @@ services:
       - 5432:5432
     volumes:
       - simhum-db:/var/lib/postgres/data
+      - ./create.sql:/docker-entrypoint-initdb.d/create.sql
+
+
+  app-simios:
     networks:
       - simhum-network
-
-  simhum-app:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: simioshuman-container
     depends_on:
-      - simhum-postgres
+      - db-simios
     ports:
       - "8080:8080"
     environment:
@@ -29,9 +31,6 @@ services:
       - SPRING_DATASOURCE_USERNAME
       - SPRING_DATASOURCE_PASSWORD
       - SPRING_PROFILES_ACTIVE
-    networks:
-      - simhum-network
-
 networks:
   simhum-network:
     driver: bridge
