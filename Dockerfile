@@ -5,7 +5,7 @@ FROM openjdk:21
 WORKDIR /app
 
 #Copy the current directory contents into the container at /app
-COPY target/simioshuman-1.2.jar /app
+COPY target/simioshuman-1.3.jar /app
 
 #Env
 ENV SPRING_DATASOURCE_URL=jdbc:postgresql://db-simios:5432/simioshumandb
@@ -16,5 +16,5 @@ ENV SPRING_PROFILES_ACTIVE=prod
 EXPOSE 8080
 
 #Run simiosHuman.jar when the container launches
-CMD [ "java", "-jar", "simioshuman-1.2.jar", "--enable-preview" ]
+CMD [ "java", "-jar", "simioshuman-1.3.jar", "--enable-preview" ]
 

@@ -1,6 +1,5 @@
 package com.mcamelo.simiosHuman.resources;
 
-import com.mcamelo.simiosHuman.dtos.DnaResponse;
 import com.mcamelo.simiosHuman.dtos.StatsResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
