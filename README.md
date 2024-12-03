@@ -54,10 +54,10 @@ Here's an example of the answer:
 {"count_mutant_dna": 40, "count_human_dna": 100: "ratio": 0.4}
 
 ## Comments:
-● Keep in mind that we will do a series of tests (For Levels 2 and 3 POSTs and GETs) with
+-  Keep in mind that we will do a series of tests (For Levels 2 and 3 POSTs and GETs) with
 valid and invalid arrays.
-● Consider algorithm performance and application response time (For levels 2 and 3), knowing that the API can receive aggressive traffic fluctuations
-● The project must contain automated tests, and code coverage must be > 80%.
+-  Consider algorithm performance and application response time (For levels 2 and 3), knowing that the API can receive aggressive traffic fluctuations
+- The project must contain automated tests, and code coverage must be > 80%.
 
 ## This challenge was translated from a teste of Mercado Livre.
 
@@ -65,17 +65,21 @@ valid and invalid arrays.
 # Technologies
 ## Back end
 - Java 21
-- Spring Boot
+- Spring Boot 3.4.0
 - JPA / Hibernate
 - Maven
 - JUnit Vanila
+- Testcontainers
+- Swagger OpenAPI
+- Prometheus
 - Using Virtual Threads for a better performance.
 
 ## Front end
 - Postman
+#### Files in /mocks
 
 ## Production
-- Back end: Docker-compose
+- Back end: Docker, Docker-compose
 - DataBase: Postgres
 
 # How execute the project
@@ -88,7 +92,7 @@ Pré-requisitos: Java 21
 git clone https://github.com/mariuo/humansimios
 
 # Get into back end
-cd backend
+cd humanSimios
 
 # Run
 ./mvnw spring-boot:run
@@ -107,45 +111,54 @@ echo $DB_DATABASE
 echo $DB_USER
 echo $DB_PASSWORD
 echo $APP_PROFILE
+```
 
+```bash
 # Maven clean package
 mvn clean package
-
+```
+```bash
 # Get into docker-compose
-dcker-compose up -d
-
-
+docker-compose up -d
+```
+```bash
+# Shutdown
+docker-compose down --volumes --rmi all
 ```
 
-## Swagger mode=test and dev
+## Swagger in Test and Dev mode.
 
-````
+```bash
 http://localhost:8080/swagger-ui/index.html
-````
-
-## Testing HEY or HTTPd
 ```
+
+## Testing HEY or HTTPd.
+```bash
 curl --location 'http://localhost:8080/simian' \
 --header 'Content-Type: application/json' \
 --data '{
     "dna": ["CTGAGA", "CTATGA", "TATTGA", "AGAGGA", "CCCCTA", "TGAAAA"] 
 }'
 ```
-- Simian
+- POST Simian
+```bash
+hey -n 100 -c 100 -m POST -T "application/json" -d '{"dna":["CTGAGA","CTATGA","TATTGA","AGAGGA","CCCCTA","TGAAAA"]}' http://localhost:8080/simian
 ```
-hey -n 32 -c 32 -m POST -T "application/json" -d '{"dna":["CTGAGA","CTATGA","TATTGA","AGAGGA","CCCCTA","TGAAAA"]}' http://localhost:8080/simian
+- POST Human
+```bash
+hey -n 100 -c 100 -m POST -T "application/json" -d '{"dna": ["ATGCGA", "CAGTGC", "TTATTT", "AGACGG","GCGTCA" ,"GCGTCA"]}' http://localhost:8080/simian
 ```
-- Human
-```
-hey -n 32 -c 32 -m POST -T "application/json" -d '{"dna": ["ATGCGA", "CAGTGC", "TTATTT", "AGACGG","GCGTCA" ,"GCGTCA"]}' http://localhost:8080/simian
-```
-- /get STATS
-```
+- /GET STATS
+```bash
 hey -n 100 -m GET http://localhost:8080/stats
+
+curl 'http://localhost:8080/stats'
 ```
-- /get findAll
-```
+- /GET findAll
+```bash
 hey -n 100 -m GET http://localhost:8080/simian
+
+curl 'http://localhost:8080/simian'
 ```
 # Author
 
