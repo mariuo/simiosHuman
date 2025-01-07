@@ -1,0 +1,21 @@
+replicaCount: 1
+
+postgres:
+  databaseName: simioshumandb
+
+springApp:
+  image:
+    repository: simioshuman_app-simios
+    pullPolicy: IfNotPresent
+    tag: latest
+
+postgresVolume:
+  persistentVolumeClaim:
+    storageSize: 500Mi  #1Gi
+
+  persistentVolume:
+    storageSize: 500Mi  #1Gi
+    pathOnHost: /var/lib/postgres/data # Replace this with the actual path on your host machine
+
+
+  mountPath: /var/lib/postgres/data

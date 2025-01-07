@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-simioshuman-app-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-simioshuman-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-simioshuman-app
+    spec:
+      containers:
+          - name: {{ .Release.Name }}-simioshuman-app-container
+            image: {{ .Values.springApp.image.repository }}:{{ .Values.springApp.image.tag }}
+            imagePullPolicy: {{ .Values.springApp.image.pullPolicy }}
+            ports:
+              - containerPort: 8080
+            env:
+              - name: SPRING_DATASOURCE_URL
+                value: {{ include "my-spring-app.fullMyPostgresConnectionURL" . | quote }}
+              - name: SPRING_DATASOURCE_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: {{ .Release.Name }}-mysql-username
+                    key: username
+              - name: SPRING_DATASOURCE_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: {{ .Release.Name }}-mysql-password
+                    key: password
