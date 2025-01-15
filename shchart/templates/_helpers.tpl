@@ -2,5 +2,3 @@
 {{- define "my-spring-app.fullMyPostgresConnectionURL" -}}
 jdbc:postgresql://{{ .Release.Name }}-postgres-service:5432/{{ .Values.postgres.databaseName }}?createDatabaseIfNotExist=true
 {{- end -}}
-
-db-simios:5432/simioshumandb

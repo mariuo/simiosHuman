@@ -191,17 +191,17 @@ curl 'http://localhost:8080/simian'
 # Commands
 
 - `minikube delete
-  minikube start
+  minikube start --driver=docker
   minikube status
   eval $(minikube docker-env)
   docker build -t simioshuman_app-simios:latest .
-  helm template shchart
+  #helm template shchart
   helm install mychart shchart
   kubectl get all
   minikube image ls
   kubectl get svs
-  minikube service mychart-mysql-service --url
-  minikube service mychart-spring-app-service --url
+  minikube service mychart-postgres-service --url
+  minikube service mychart-simioshuman-app-service --url
   minikube tunnel
   kubectl get all
 

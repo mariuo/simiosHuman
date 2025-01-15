@@ -24,10 +24,10 @@ spec:
               - name: SPRING_DATASOURCE_USERNAME
                 valueFrom:
                   secretKeyRef:
-                    name: {{ .Release.Name }}-mysql-username
+                    name: {{ .Release.Name }}-postgres-username
                     key: username
               - name: SPRING_DATASOURCE_PASSWORD
                 valueFrom:
                   secretKeyRef:
-                    name: {{ .Release.Name }}-mysql-password
+                    name: {{ .Release.Name }}-postgres-password
                     key: password

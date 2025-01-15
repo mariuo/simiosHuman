@@ -8,10 +8,10 @@ WORKDIR /app
 COPY target/simioshuman-1.3.jar /app
 
 #Env
-ENV SPRING_DATASOURCE_URL=jdbc:postgresql://db-simios:5432/simioshumandb
-ENV SPRING_DATASOURCE_USERNAME=simioshumanuser
-ENV SPRING_DATASOURCE_PASSWORD=simioshumanpass
-ENV SPRING_PROFILES_ACTIVE=prod
+# ENV SPRING_DATASOURCE_URL=jdbc:postgresql://db-simios:5432/simioshumandb
+# ENV SPRING_DATASOURCE_USERNAME=simioshumanuser
+# ENV SPRING_DATASOURCE_PASSWORD=simioshumanpass
+# ENV SPRING_PROFILES_ACTIVE=prod
 #Make the port available to outside.
 EXPOSE 8080
 
