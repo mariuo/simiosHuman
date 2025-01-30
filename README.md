@@ -160,7 +160,7 @@ curl --location 'http://localhost:8080/simian' \
 - POST Simian
 
 ```bash
-hey -n 100 -c 100 -m POST -T "application/json" -d '{"dna":["CTGAGA","CTATGA","TATTGA","AGAGGA","CCCCTA","TGAAAA"]}' http://localhost:8080/simian
+hey -n 100 -c 100 -m POST -T "application/json" -d '{"dna":["CTGAGA","CTATGA","TATTGA","AGAGGA","CCCCTA","TGAAAA"]}' http://192.168.49.2:8080/simian
 ```
 
 - POST Human

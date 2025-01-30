@@ -31,3 +31,5 @@ spec:
                   secretKeyRef:
                     name: {{ .Release.Name }}-postgres-password
                     key: password
+              - name: SPRING_PROFILES_ACTIVE
+                value: PROD
